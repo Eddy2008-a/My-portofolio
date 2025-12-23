@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editech Cyber Sphere| Designer & Engineer</title>
+    
+    <style>
+        /* CSS VARIABLES - The "Global Colors" like in PixelLab */
+        :root {
+            --primary-green: #2ecc71;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #ffffff;
+        }
+
+        /* RESET & BASE STYLES */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: 0.3s;
+        }
+
+        /* HEADER SECTION */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('background.jpg');
+            background-size: cover;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-green);
+            object-fit: cover;
+        }
+
+        /* NAVIGATION */
+        nav {
+            background: #000;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover { color: var(--primary-green); }
+
+        /* PORTFOLIO GRID */
+        .container { padding: 40px 20px; max-width: 1000px; margin: auto; }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* THE FORM SECTION */
+        form {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #2a2a2a;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover { background: #27ae60; }
+
+        /* FOOTER */
+        footer { padding: 40px; background: #000; font-size: 14px; color: #777; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+        
+    </nav>
+
+    <header id="home">
+        <img src="photo.jpg" alt="Edidiong Profile">
+        <h1>Hi, I'm Edidiong</h1>
+        <p>Am a Graphics Designer (Corel Draw & PixelLab), and a Web designer| Future Software Engineer</p>
+    </header>
+
+    <div class="container">
+        
+        <h2 id="work">My Design Portfolio</h2>
+        <div class="gallery">
+            <div class="card">
+                <img src="design1.jpg" alt="Logo Project">
+                <h3>Brand Identity</h3>
+                <p>Created using Corel Draw X7</p>
+            </div>
+            <div class="card">
+                <img src="design2.jpg" alt="Poster/flex Project">
+                <h3>Poster/Fkex</h3>
+                <p>Mobile design using PixelLab</p>
+            </div>
+        </div>
+
+        <hr style="margin: 50px 0; border: 0.5px solid #333;">
+
+        <h2 id="contact">Hire Me for a Project</h2>
+        <form id="contactForm">
+    <label>Your Name</label>
+    <input type="text" id="userName" placeholder="Enter your name" required>
+    
+    <label>Project Type</label>
+    <input type="text" id="projectType" placeholder="e.g. Logo Design">
+    
+    <label>How should I reply?</label>
+    <select id="contactMethod" style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; background: #2a2a2a; color: white;">
+        <option value="whatsapp">Send via WhatsApp</option>
+        <option value="email">Send via Email</option>
+    </select>
+    
+    <label>Message</label>
+    <textarea id="userMessage" rows="4" placeholder="Describe your design..."></textarea>
+    
+    <button type="button" onclick="handleSend()">Send Request</button>
+</form>
+
+<script>
+function handleSend() {
+    // 1. Get the values from the form
+    const name = document.getElementById('userName').value;
+    const project = document.getElementById('projectType').value;
+    const message = document.getElementById('userMessage').value;
+    const method = document.getElementById('contactMethod').value;
+
+    // 2. Format the text for the message
+    const fullMessage = `Hello Edidiong, my name is ${name}. I need a ${project}. Details: ${message}`;
+
+    // 3. Logic: If user chose WhatsApp
+    if (method === "whatsapp") {
+        const phone = "234XXXXXXXXXX"; // PUT YOUR REAL NUMBER HERE (No + or 00)
+        const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(fullMessage)}`;
+        window.open(waUrl, '_blank');
+    } 
+    // 4. Logic: If user chose Email
+    else {
+        const email = "yourname@email.com"; // PUT YOUR REAL EMAIL HERE
+        const mailUrl = `mailto:${email}?subject=Design Request from ${name}&body=${fullMessage}`;
+        window.location.href = mailUrl;
+    }
+}
+</script>
+
+    </div>
+
+    <footer>
+        <section id="about" style="padding: 50px 20px; background: #1a1a1a; border-radius: 20px; margin: 20px 0;">
+    <h2 style="color: #2ecc71;">About Me</h2>
+    <p style="font-size: 18px; max-width: 800px; margin: auto; color: #ccc;">
+        Hi! I'm <strong>Edidiong</strong>. I bridge the gap between <strong>Art</strong> and <strong>Technology</strong>. 
+        With a background in Graphics Design using <em>Corel Draw</em> and <em>PixelLab</em>, I am now 
+        expanding my horizons into <strong>Software Engineering</strong>.
+    </p>
+    <p style="margin-top: 20px; color: #aaa;">
+        I believe that a great website isn't just about code—it's about a visual experience that speaks to the user. 
+        I'm currently building projects on my mobile device to prove that creativity has no boundaries.
+    </p>
+</section>
+<section id="about" style="padding: 60px 20px; background-color: var(--card-bg); line-height: 1.6;">
+    
+    <div style="max-width: 600px; margin: 0 auto;">
+        <h2 style="color: var(--primary-green); border-bottom: 2px solid var(--primary-green); display: inline-block; margin-bottom: 20px;">
+            
+        </h2>                                    
+                                                                
+                                                                                 
+            <strong>Edidiong</strong>, a creative designer transitioned into software engineering. 
+            I have spent years mastering visual communication through tools like <strong>Corel Draw</strong> 
+            and <strong>PixelLab</strong> to create stunning graphics.
+        </p>
+        
+        <p style="font-size: 1.1rem; color: var(--text-color); opacity: 0.9;">
+            My journey into coding is driven by a passion to build the tools that I use. 
+            I don't just design interfaces; I code them to life. Whether it is a logo for a brand 
+            or a responsive website, I focus on precision, speed, and user experience.
+        </p>
+
+        <div style="margin-top: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
+            <span style="background: #333; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem;">🎨 Corel Draw</span>
+            <span style="background: #333; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem;">📱 PixelLab</span>
+            <span style="background: #333; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem;">💻 HTML/CSS</span>
+        </div>
+    </div>
+    
+</section>
+<button id="backToTop" title="Go to top">↑</button>
+   
+<script>
+// Get the button
+let mybutton = document.getElementById("backToTop");
+
+// When the user scrolls down 300px from the top, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks, scroll to the top of the document
+mybutton.onclick = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' // This makes the scroll nice and slow, not a jump
+  });
+};
+</script>
+
+        <p>&copy; 2025 Editech Cyber Sphere. Built on a Smartphone.</p>
+    </footer>
+
+</body>
+</html>
+
