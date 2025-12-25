@@ -240,56 +240,60 @@ header img {
             </div>
         </section>
 
-        <section id="contact" style="margin-top: 80px; max-width: 600px;">
-            <h2 class="section-title">Hire me for a Project</h2>
-             
-        <form id="contactForm">
-    <label>Your Name</label>
-    <input type="text" id="userName" placeholder="Enter your name" required>
+         <section id="contact" style="margin-top: 80px; max-width: 600px; margin: 0 auto;">
+    <h2 class="section-title">Hire me for a Project</h2>
     
-    <label>Project Type</label>
-    <input type="text" id="projectType" placeholder="e.g. Logo Design">
-    
-    <label>How should I reply?</label>
-    <select id="contactMethod" style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; background: #2a2a2a; color: white;">
-        <option value="whatsapp">Send via WhatsApp</option>
-        <option value="email">Send via Email</option>
-    </select>
-    
-    <label>Message</label>
-    <textarea id="userMessage" rows="4" placeholder="Describe your design..."></textarea>
-    
-    <button style="background: var(--neon-mint); border: none; padding: 12px 30px; border-radius: 8px; font-wMessagebold; width: 100%;">Send Request</button>
-</form>
-
+    <form id="contactForm" onsubmit="sendMessage(event)">
+        <label>Your Name</label>
+        <input type="text" id="userName" placeholder="Enter your name" required>
+        
+        <label>Project Type</label>
+        <input type="text" id="projectType" placeholder="e.g. Logo Design" required>
+        
+        <label>How should I reply?</label>
+        <select id="contactMethod" style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; background: #2a2a2a; color: white;">
+            <option value="whatsapp">Send via WhatsApp</option>
+            <option value="email">Send via Email</option>
+        </select>
+        
+        <label>Message</label>
+        <textarea id="userMessage" rows="4" placeholder="Describe your design..." required></textarea>
+        
+        <button type="submit" style="background: var(--neon-mint); border: none; padding: 12px 30px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; color: #0f172a;">
+            Send Request
+        </button>
+    </form>
+</section>
 <script>
-function handleSend() {
-    // 1. Get the values from the form
-    const name = document.getElementById('userName').value;
-    const project = document.getElementById('projectType').value;
-    const message = document.getElementById('userMessage').value;
-    const method = document.getElementById('contactMethod').value;
+    function sendMessage(e) {
+        // This line prevents the page from refreshing
+        e.preventDefault();
 
-    // 2. Format the text for the message
-    const fullMessage = `Hello Edidiong, my name is ${name}. I need a ${project}. Details: ${message}`;
+        // 1. Grab the data
+        const name = document.getElementById('userName').value;
+        const project = document.getElementById('projectType').value;
+        const method = document.getElementById('contactMethod').value;
+        const message = document.getElementById('userMessage').value;
+        
+        // 2. YOUR DETAILS
+        const myPhoneNumber = "2347026390123"; // Your WhatsApp
+        const myEmail = "edidiongabasi429@gmail.com";   // Your Email
+        
+        // 3. Format the message
+        const fullMessage = `Hello Edidiong! %0A%0A` +
+                            `*Name:* ${name}%0A` +
+                            `*Project:* ${project}%0A` +
+                            `*Details:* ${message}`;
 
-    // 3. Logic: If user chose WhatsApp
-    if (method === "whatsapp") {
-        const phone = "234XXXXXXXXXX"; // PUT YOUR REAL NUMBER HERE (No + or 00)
-        const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(fullMessage)}`;
-        window.open(waUrl, '_blank');
-    } 
-    // 4. Logic: If user chose Email
-    else {
-        const email = "yourname@email.com"; // PUT YOUR REAL EMAIL HERE
-        const mailUrl = `mailto:${email}?subject=Design Request from ${name}&body=${fullMessage}`;
-        window.location.href = mailUrl;
+        if (method === "whatsapp") {
+            window.open(`https://wa.me/${myPhoneNumber}?text=${fullMessage}`, '_blank');
+        } else {
+            const subject = encodeURIComponent(`New Project Request: ${project}`);
+            const body = encodeURIComponent(`Client Name: ${name}\nProject: ${project}\n\nMessage:\n${message}`);
+            window.location.href = `mailto:${myEmail}?subject=${subject}&body=${body}`;
+        }
     }
-}
-</script>                              
-           
-            </form>
-        </section>
+</script>
 
         <footer>
             <p>&copy; 2025 EdidiongAbasi @Editech Cyber Sphere. Built with Code and Design.</p>
